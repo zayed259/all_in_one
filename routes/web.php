@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    echo number_format(usdToBdt(100),2);
+});
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'index'])->name('index');
