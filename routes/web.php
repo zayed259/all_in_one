@@ -19,7 +19,9 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    echo number_format(usdToBdt(100),2);
+    // echo number_format(usdToBdt(100),2);
+    return view('domain_checker');
+    // echo domainChecker('crackit-bd.com');
 });
 
 
