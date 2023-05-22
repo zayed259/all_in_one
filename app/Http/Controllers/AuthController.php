@@ -13,10 +13,10 @@ class AuthController extends Controller
     //     $this->middleware('guest')->except('logout');
     // }
 
-    public function index()
-    {
-        return view('welcome');
-    }
+    // public function index()
+    // {
+    //     return view('welcome');
+    // }
 
     public function register()
     {
@@ -40,7 +40,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
 
         // return redirect()->intended('index');
     }
@@ -60,17 +60,13 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('home');
+            // return redirect()->intended('dashboard');
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
-    }
-
-    public function home()
-    {
-        return view('home');
     }
 
     public function logout()

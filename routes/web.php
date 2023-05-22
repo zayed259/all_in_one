@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,7 @@ Route::get('/test', function () {
 
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', [AuthController::class, 'index'])->name('index');
+    // Route::get('/', [AuthController::class, 'index'])->name('home');
     // login
     Route::get('login', [AuthController::class, 'login'])->name('login');
     Route::post('login', [AuthController::class, 'check'])->name('checklogin');
@@ -37,8 +38,12 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('home', [AuthController::class, 'home'])->name('home');
+    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     // logout
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+    //student registration
+    Route::get('student-registration', [DashboardController::class, 'index'])->name('student-registration');
+    Route::post('student-registration', [DashboardController::class, 'store'])->name('student-registration-store');
 });
