@@ -54,6 +54,79 @@ body {
     padding: 30px 25px 25px 25px;
 }
 
+.wrapper form .social-media {
+    display: inline-block;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.wrapper form .social-media a{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+    color: #4f3232;
+    font-size: 15px;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    /* border: 1px solid #4f3232; */
+}
+
+.wrapper form .social-media .google{
+    background-color: #EA4335;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.wrapper form .social-media .google:hover{
+    background-color: #16a085;
+    color: #000;
+}
+
+.wrapper form .social-media .facebook{
+    background-color: #3b5998;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.wrapper form .social-media .facebook:hover{
+    background-color: #16a085;
+    color: #000;
+}
+
+.wrapper form .social-media .github{
+    background-color: #333;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.wrapper form .social-media .github:hover{
+    background-color: #16a085;
+    color: #000;
+}
+
+.wrapper form .social-media .linkedin{
+    background-color: #0077B5;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.wrapper form .social-media .linkedin:hover{
+    background-color: #16a085;
+    color: #000;
+}
+
+.wrapper form .or{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 .wrapper form .row {
     height: 40px;
     margin-bottom: 15px;

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -74,5 +75,61 @@ class AuthController extends Controller
         Auth::logout();
 
         return redirect()->route('login');
+    }
+
+    //login with social
+    public function redirect($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function callback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
+
+        $this->_registerOrLoginUser($user);
+
+        return redirect()->route('dashboard');
+    }
+
+    protected function _registerOrLoginUser($data)
+    {
+        $user = User::where('email', '=', $data->email)->first();
+
+        if (!$user) {
+            
+            $provider = explode('.', $data->avatar);
+            if($provider[1] == 'githubusercontent') {
+                $provider = 'github';
+            }
+            else if($provider[1] == 'googleusercontent') {
+                $provider = 'google';
+            }
+            else if($provider[1] == 'facebook') {
+                $provider = 'facebook';
+            }
+            else if($provider[1] == 'licdn') {
+                $provider = 'linkedin';
+            }
+            else {
+                $provider = 'unknown';
+            }
+            
+            $email = $data->email;
+            if($email == null)
+            {
+                $email = $data->id;
+            }
+            
+            $user = new User();
+            $user->name = $data->name;
+            $user->email = $email;
+            $user->provider = $provider;
+            $user->provider_id = $data->id;
+            $user->provider_token = $data->token;
+            $user->avatar = $data->avatar;
+            $user->save();
+        }
+        Auth::login($user);
     }
 }

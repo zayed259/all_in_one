@@ -1,262 +1,522 @@
-<!doctype html>
-<html lang="en" data-bs-theme="auto">
-<!-- <head><script src="../assets/js/color-modes.js"></script> -->
+<!DOCTYPE html>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-<meta name="generator" content="Hugo 0.111.3">
-<title>All in One</title>
-<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
 
-<link href="{{url('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-    }
+    <title>@yield('title') | All in One</title>
 
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
-    }
+    <meta name="description" content="" />
 
-    .b-example-divider {
-        width: 100%;
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{url('assets/img/favicon.ico')}}" />
 
-    .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-    }
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
 
-    .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-    }
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="{{url('assets/vendor/fonts/boxicons.css')}}" />
 
-    .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-    }
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{url('assets/vendor/css/core.css')}}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{url('assets/vendor/css/theme-default.css')}}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{url('assets/css/demo.css')}}" />
 
-    .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-    }
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{{url('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
 
-    .btn-bd-primary {
-        --bd-violet-bg: #712cf9;
-        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+    <link rel="stylesheet" href="{{url('assets/vendor/libs/apex-charts/apex-charts.css')}}" />
 
-        --bs-btn-font-weight: 600;
-        --bs-btn-color: var(--bs-white);
-        --bs-btn-bg: var(--bd-violet-bg);
-        --bs-btn-border-color: var(--bd-violet-bg);
-        --bs-btn-hover-color: var(--bs-white);
-        --bs-btn-hover-bg: #6528e0;
-        --bs-btn-hover-border-color: #6528e0;
-        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-        --bs-btn-active-color: var(--bs-btn-hover-color);
-        --bs-btn-active-bg: #5a23c8;
-        --bs-btn-active-border-color: #5a23c8;
-    }
+    <!-- Page CSS -->
 
-    .bd-mode-toggle {
-        z-index: 1500;
-    }
-</style>
+    <!-- Helpers -->
+    <script src="{{url('assets/vendor/js/helpers.js')}}"></script>
 
-
-<!-- Custom styles for this template -->
-<link href="{{url('assets/css/dashboard.css')}}" rel="stylesheet">
+    <script src="{{url('assets/js/config.js')}}"></script>
 </head>
 
 <body>
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol id="check2" viewBox="0 0 16 16">
-            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-        </symbol>
-        <symbol id="circle-half" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
-        </symbol>
-        <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-            <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
-            <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
-        </symbol>
-        <symbol id="sun-fill" viewBox="0 0 16 16">
-            <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
-        </symbol>
-    </svg>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
 
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-        <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-            <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
-                <use href="#circle-half"></use>
-            </svg>
-            <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-            <li>
-                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-                    <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-                        <use href="#sun-fill"></use>
-                    </svg>
-                    Light
-                    <svg class="bi ms-auto d-none" width="1em" height="1em">
-                        <use href="#check2"></use>
-                    </svg>
-                </button>
-            </li>
-            <li>
-                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-                    <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-                        <use href="#moon-stars-fill"></use>
-                    </svg>
-                    Dark
-                    <svg class="bi ms-auto d-none" width="1em" height="1em">
-                        <use href="#check2"></use>
-                    </svg>
-                </button>
-            </li>
-            <li>
-                <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-                    <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-                        <use href="#circle-half"></use>
-                    </svg>
-                    Auto
-                    <svg class="bi ms-auto d-none" width="1em" height="1em">
-                        <use href="#check2"></use>
-                    </svg>
-                </button>
-            </li>
-        </ul>
-    </div>
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo">
+                    <a href="{{url('dashboard')}}" class="app-brand-link">
+                        <span class="app-brand-logo demo">
+                            <img src="{{url('assets/img/favicon.ico')}}" alt="Brand Logo" class="img-fluid" />
+                        </span>
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2">AllInOne</span>
+                    </a>
 
-
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">All in One</a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search"> -->
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="{{url('logout')}}">Sign out</a>
-            </div>
-        </div>
-    </header>
-
-    <div class="container-fluid">
-        <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-body-tertiary sidebar collapse">
-                <div class="position-sticky pt-3 sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link @if(Request::segment(1) == 'home')active @endif" aria-current="page" href="{{url('home')}}">
-                                <span data-feather="home" class="align-text-bottom"></span>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if(Request::segment(1) == 'student-registration')active @endif" href="{{url('student-registration')}}">
-                                <span data-feather="file" class="align-text-bottom"></span>
-                                Registration Form
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="shopping-cart" class="align-text-bottom"></span>
-                                Products
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="users" class="align-text-bottom"></span>
-                                Customers
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-                                Reports
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="layers" class="align-text-bottom"></span>
-                                Integrations
-                            </a>
-                        </li>
-                    </ul>
-
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-                        <span>Saved reports</span>
-                        <a class="link-secondary" href="#" aria-label="Add a new report">
-                            <span data-feather="plus-circle" class="align-text-bottom"></span>
-                        </a>
-                    </h6>
-                    <ul class="nav flex-column mb-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text" class="align-text-bottom"></span>
-                                Current month
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text" class="align-text-bottom"></span>
-                                Last quarter
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text" class="align-text-bottom"></span>
-                                Social engagement
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text" class="align-text-bottom"></span>
-                                Year-end sale
-                            </a>
-                        </li>
-                    </ul>
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                    </a>
                 </div>
-            </nav>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="menu-inner-shadow"></div>
+
+                <ul class="menu-inner py-1">
+                    <!-- Dashboard -->
+                    <li class="menu-item @if(Request::segment(1) == 'dashboard')active @endif">
+                        <a href="{{url('dashboard')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Dashboard</div>
+                        </a>
+                    </li>
+
+                    <!-- Documentation -->
+                    <li class="menu-item @if(Request::segment(1) == 'socialite' || Request::segment(1) == 'dompdf' || Request::segment(1) == 'copy_to_clipboard')active open @endif">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <div data-i18n="Documentation">Documentation</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            <li class="menu-item @if(Request::segment(1) == 'socialite')active @endif">
+                                <a href="{{url('socialite')}}" class="menu-link">
+                                    <div data-i18n="Socialite">Socialite</div>
+                                </a>
+                            </li>
+                            <li class="menu-item @if(Request::segment(1) == 'copy_to_clipboard')active @endif">
+                                <a href="{{url('copy_to_clipboard')}}" class="menu-link">
+                                    <div data-i18n="Socialite">Copy to Clipboard</div>
+                                </a>
+                            </li>
+                            <li class="menu-item @if(Request::segment(1) == 'dompdf')active @endif">
+                                <a href="{{url('dompdf')}}" class="menu-link">
+                                    <div data-i18n="DOM PDF">DOM PDF</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="layouts-container.html" class="menu-link">
+                                    <div data-i18n="Container">Container</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="layouts-fluid.html" class="menu-link">
+                                    <div data-i18n="Fluid">Fluid</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="layouts-blank.html" class="menu-link">
+                                    <div data-i18n="Blank">Blank</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Pages</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                            <div data-i18n="Account Settings">Account Settings</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="pages-account-settings-account.html" class="menu-link">
+                                    <div data-i18n="Account">Account</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="pages-account-settings-notifications.html" class="menu-link">
+                                    <div data-i18n="Notifications">Notifications</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="pages-account-settings-connections.html" class="menu-link">
+                                    <div data-i18n="Connections">Connections</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                            <div data-i18n="Authentications">Authentications</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="auth-login-basic.html" class="menu-link" target="_blank">
+                                    <div data-i18n="Basic">Login</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="auth-register-basic.html" class="menu-link" target="_blank">
+                                    <div data-i18n="Basic">Register</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
+                                    <div data-i18n="Basic">Forgot Password</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                            <div data-i18n="Misc">Misc</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="pages-misc-error.html" class="menu-link">
+                                    <div data-i18n="Error">Error</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="pages-misc-under-maintenance.html" class="menu-link">
+                                    <div data-i18n="Under Maintenance">Under Maintenance</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Components -->
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
+                    <!-- Cards -->
+                    <li class="menu-item">
+                        <a href="cards-basic.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">Cards</div>
+                        </a>
+                    </li>
+                    <!-- User interface -->
+                    <li class="menu-item">
+                        <a href="javascript:void(0)" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-box"></i>
+                            <div data-i18n="User interface">User interface</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="ui-accordion.html" class="menu-link">
+                                    <div data-i18n="Accordion">Accordion</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-alerts.html" class="menu-link">
+                                    <div data-i18n="Alerts">Alerts</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-badges.html" class="menu-link">
+                                    <div data-i18n="Badges">Badges</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-buttons.html" class="menu-link">
+                                    <div data-i18n="Buttons">Buttons</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-carousel.html" class="menu-link">
+                                    <div data-i18n="Carousel">Carousel</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-collapse.html" class="menu-link">
+                                    <div data-i18n="Collapse">Collapse</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-dropdowns.html" class="menu-link">
+                                    <div data-i18n="Dropdowns">Dropdowns</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-footer.html" class="menu-link">
+                                    <div data-i18n="Footer">Footer</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-list-groups.html" class="menu-link">
+                                    <div data-i18n="List Groups">List groups</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-modals.html" class="menu-link">
+                                    <div data-i18n="Modals">Modals</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-navbar.html" class="menu-link">
+                                    <div data-i18n="Navbar">Navbar</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-offcanvas.html" class="menu-link">
+                                    <div data-i18n="Offcanvas">Offcanvas</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-pagination-breadcrumbs.html" class="menu-link">
+                                    <div data-i18n="Pagination &amp; Breadcrumbs">Pagination &amp; Breadcrumbs</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-progress.html" class="menu-link">
+                                    <div data-i18n="Progress">Progress</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-spinners.html" class="menu-link">
+                                    <div data-i18n="Spinners">Spinners</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-tabs-pills.html" class="menu-link">
+                                    <div data-i18n="Tabs &amp; Pills">Tabs &amp; Pills</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-toasts.html" class="menu-link">
+                                    <div data-i18n="Toasts">Toasts</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-tooltips-popovers.html" class="menu-link">
+                                    <div data-i18n="Tooltips & Popovers">Tooltips &amp; popovers</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="ui-typography.html" class="menu-link">
+                                    <div data-i18n="Typography">Typography</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Extended components -->
+                    <li class="menu-item">
+                        <a href="javascript:void(0)" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-copy"></i>
+                            <div data-i18n="Extended UI">Extended UI</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
+                                    <div data-i18n="Perfect Scrollbar">Perfect scrollbar</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="extended-ui-text-divider.html" class="menu-link">
+                                    <div data-i18n="Text Divider">Text Divider</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="icons-boxicons.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-crown"></i>
+                            <div data-i18n="Boxicons">Boxicons</div>
+                        </a>
+                    </li>
+
+                    <!-- Forms & Tables -->
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
+                    <!-- Forms -->
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-detail"></i>
+                            <div data-i18n="Form Elements">Form Elements</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="forms-basic-inputs.html" class="menu-link">
+                                    <div data-i18n="Basic Inputs">Basic Inputs</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="forms-input-groups.html" class="menu-link">
+                                    <div data-i18n="Input groups">Input groups</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-detail"></i>
+                            <div data-i18n="Form Layouts">Form Layouts</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="form-layouts-vertical.html" class="menu-link">
+                                    <div data-i18n="Vertical Form">Vertical Form</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="form-layouts-horizontal.html" class="menu-link">
+                                    <div data-i18n="Horizontal Form">Horizontal Form</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Tables -->
+                    <li class="menu-item">
+                        <a href="tables-basic.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">Tables</div>
+                        </a>
+                    </li>
+                    <!-- Misc -->
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
+                    <li class="menu-item">
+                        <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-support"></i>
+                            <div data-i18n="Support">Support</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-file"></i>
+                            <div data-i18n="Documentation">Documentation</div>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            <!-- / Menu -->
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme layout-navbar-fixed" id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <!-- Search -->
+                        <div class="navbar-nav align-items-center">
+                            <div class="nav-item d-flex align-items-center">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+                                <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
+                            </div>
+                        </div>
+                        <!-- /Search -->
+
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <!-- Place this tag where you want the button to render. -->
+                            <li class="nav-item lh-1 me-3">
+                                <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+                            </li>
+
+                            <!-- User -->
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        @if(Auth::user()->avatar)
+                                        <img src="{{Auth::user()->avatar}}" alt="" class="w-px-40 h-auto rounded-circle" />
+                                        @else
+                                        <img src="{{url('assets/img/avatar.png')}}" alt="" class="w-px-40 h-auto rounded-circle" />
+                                        @endif
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar avatar-online">
+                                                        @if(Auth::user()->avatar)
+                                                            <img src="{{Auth::user()->avatar}}" alt="" class="w-px-40 h-auto rounded-circle" />
+                                                        @else
+                                                            <img src="{{url('assets/img/avatar.png')}}" alt="" class="w-px-40 h-auto rounded-circle" />
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <span class="fw-semibold d-block">{{Auth::user()->name}}</span>
+                                                    <small class="text-muted">Admin</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle">My Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <span class="d-flex align-items-center align-middle">
+                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                                                <span class="flex-grow-1 align-middle">Billing</span>
+                                                <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{url('logout')}}">
+                                            <i class="bx bx-power-off me-2"></i>
+                                            <span class="align-middle">Log Out</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--/ User -->
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- / Navbar -->
+
+                <!-- Content wrapper -->
                 @yield('content')
-            </main>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
         </div>
+
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+    <!-- / Layout wrapper -->
 
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="{{url('assets/vendor/libs/jquery/jquery.js')}}"></script>
+    <script src="{{url('assets/vendor/libs/popper/popper.js')}}"></script>
+    <script src="{{url('assets/vendor/js/bootstrap.js')}}"></script>
+    <script src="{{url('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
 
-    <script src="{{url('assets/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url('assets/vendor/js/menu.js')}}"></script>
+    <!-- endbuild -->
 
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
-    <script src="{{url('assets/js/dashboard.js')}}"></script>
+    <!-- Vendors JS -->
+    <script src="{{url('assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
+
+    <!-- Main JS -->
+    <script src="{{url('assets/js/main.js')}}"></script>
+
+    <!-- Page JS -->
+    <script src="{{url('assets/js/dashboards-analytics.js')}}"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    @yield('script')
 </body>
 
 </html>

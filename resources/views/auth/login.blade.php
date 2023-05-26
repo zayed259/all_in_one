@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <!-- Created By CodingLab - www.codinglabweb.com -->
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Login Form | CodingLab</title> 
+    <title>Login Form</title>
     <link rel="stylesheet" href="{{url('assets/css/logregstyle.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-  </head>
-  <body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+</head>
+
+<body>
     <div class="container">
         <div class="wrapper">
             <div class="title"><span>Login Form</span></div>
@@ -18,6 +20,16 @@
             </div>
             <form action="{{ route('login') }}" method="POST" class="signin-form">
                 @csrf
+
+                <!-- //login with google, facebook or github -->
+                <div class="social-media">
+                    <a href="{{ url('login/google') }}" class="google">Login with Google</a>
+                    <a href="{{ url('login/facebook') }}" class="facebook">Login with Facebook</a>
+                    <a href="{{ url('login/github') }}" class="github">Login with Github</a>
+                    <a href="{{ url('login/linkedin') }}" class="linkedin">Login with LinkedIn</a>
+                </div>
+
+                <div class="or">OR</div>
                 <div class="row">
                     <i class="fas fa-envelope"></i>
                     <input type="text" name="email" placeholder="Email">
@@ -36,6 +48,7 @@
         </div>
     </div>
     <script src="{{url('assets/js/jquery-3.6.0.min.js')}}"></script>
-	<script src="{{url('assets/js/logreg.js')}}"></script>
-  </body>
+    <script src="{{url('assets/js/logreg.js')}}"></script>
+</body>
+
 </html>

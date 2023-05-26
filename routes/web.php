@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DocumentationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,10 @@ Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'login'])->name('login');
     Route::post('login', [AuthController::class, 'check'])->name('checklogin');
 
+    //login with social
+    Route::get('login/{provider}', [AuthController::class, 'redirect']);
+    Route::get('login/{provider}/callback', [AuthController::class, 'callback']);
+
     // register
     Route::get('register', [AuthController::class, 'register'])->name('register');
     Route::post('register', [AuthController::class, 'store'])->name('store');
@@ -39,6 +44,11 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+    // documentation
+    Route::get('socialite', [DocumentationController::class, 'socialite'])->name('socialite');
+    Route::get('copy_to_clipboard', [DocumentationController::class, 'copy_to_clipboard'])->name('copy_to_clipboard');
+    Route::get('dompdf', [DocumentationController::class, 'dompdf'])->name('dompdf');
 
     // logout
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
